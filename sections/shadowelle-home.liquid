@@ -1,37 +1,86 @@
 {{ 'shadowelle-home.css' | asset_url | stylesheet_tag }}
+
 <div class="shadowelle-home">
   <section class="sh-hero">
-    <div class="sh-hero__media sh-placeholder">{% if section.settings.hero_image != blank %}{{ section.settings.hero_image | image_url: width: 1800 | image_tag: loading: 'eager', widths: '600,900,1200,1800', sizes: '70vw', alt: section.settings.hero_alt }}{% endif %}</div>
-    <div class="sh-hero__copy"><div><p class="sh-kicker">{{ section.settings.hero_kicker }}</p><h1>{{ section.settings.hero_heading }}</h1>{{ section.settings.hero_text }}<a class="sh-btn" href="{{ section.settings.hero_link }}">{{ section.settings.hero_button }}</a></div></div>
+    <div class="sh-hero__media sh-placeholder">
+      {% if section.settings.hero_image != blank %}
+        {{ section.settings.hero_image | image_url: width: 1800 | image_tag: loading: 'eager', widths: '600,900,1200,1800', sizes: '70vw', alt: section.settings.hero_alt }}
+      {% endif %}
+    </div>
+    <div class="sh-hero__copy">
+      <div>
+        <p class="sh-kicker">{{ section.settings.hero_kicker }}</p>
+        <h1>{{ section.settings.hero_heading }}</h1>
+        {{ section.settings.hero_text }}
+        <a class="sh-btn" href="{{ section.settings.hero_link }}">{{ section.settings.hero_button }}</a>
+      </div>
+    </div>
   </section>
-  <div class="sh-strip">{% for block in section.blocks %}{% if block.type == 'benefit' %}<div {{ block.shopify_attributes }}>{{ block.settings.text }}</div>{% endif %}{% endfor %}</div>
 
-  <section class="sh-section"><div class="sh-wrap"><div class="sh-center"><p class="sh-kicker">New collection</p><h2 class="sh-title">{{ section.settings.latest_heading }}</h2></div><div class="sh-products">{% assign latest = section.settings.latest_collection %}{% if latest != blank and latest.products_count > 0 %}{% for product in latest.products limit: 4 %}{% assign product_alt = product.featured_image.alt | default: product.title %}<a class="sh-product" href="{{ product.url }}"><div class="sh-product__media sh-placeholder">{% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '300,500,700', sizes: '(min-width: 750px) 25vw, 50vw', alt: product_alt }}{% endif %}</div><div class="sh-product__meta"><h3>{{ product.title }}</h3><p>{{ product.price | money }}</p></div></a>{% endfor %}{% else %}{% for i in (1..4) %}<div class="sh-product"><div class="sh-product__media sh-placeholder"></div><div class="sh-product__meta"><h3>{{ section.settings.placeholder_product_name }} {{ i }}</h3><p>{{ shop.currency }} · Add your product</p><div class="sh-swatches"><i></i><i></i><i></i></div></div></div>{% endfor %}{% endif %}</div></div></section>
+  <div class="sh-strip">
+    {% for block in section.blocks %}
+      <div {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+    {% endfor %}
+  </div>
 
-  <section class="sh-section"><div class="sh-wrap"><div class="sh-center"><p class="sh-kicker">Curated edits</p><h2 class="sh-title">{{ section.settings.edit_heading }}</h2></div><div class="sh-editorial"><div class="sh-editorial__card sh-placeholder">{% if section.settings.edit_one != blank %}{{ section.settings.edit_one | image_url: width: 900 | image_tag: loading: 'lazy', alt: 'Shadowelle edit' }}{% endif %}<span class="sh-label">Tops</span></div><div class="sh-editorial__card sh-placeholder">{% if section.settings.edit_two != blank %}{{ section.settings.edit_two | image_url: width: 900 | image_tag: loading: 'lazy', alt: 'Shadowelle edit' }}{% endif %}<span class="sh-label">Dresses</span></div><div class="sh-editorial__card sh-placeholder">{% if section.settings.edit_three != blank %}{{ section.settings.edit_three | image_url: width: 900 | image_tag: loading: 'lazy', alt: 'Shadowelle edit' }}{% endif %}<span class="sh-label">Blazers</span></div></div></div></section>
-
-  <section class="sh-section"><div class="sh-wrap"><div class="sh-center"><p class="sh-kicker">Style finder</p><h2 class="sh-title">Find your look</h2></div><div class="sh-mosaic"><div class="sh-tall sh-placeholder">{% if section.settings.look_one != blank %}{{ section.settings.look_one | image_url: width: 1000 | image_tag: loading: 'lazy', alt: 'Shadowelle lookbook' }}{% endif %}</div><div class="sh-placeholder">{% if section.settings.look_two != blank %}{{ section.settings.look_two | image_url: width: 700 | image_tag: loading: 'lazy', alt: 'Shadowelle lookbook' }}{% endif %}</div><div class="sh-placeholder">{% if section.settings.look_three != blank %}{{ section.settings.look_three | image_url: width: 700 | image_tag: loading: 'lazy', alt: 'Shadowelle lookbook' }}{% endif %}</div><div class="sh-placeholder">{% if section.settings.look_four != blank %}{{ section.settings.look_four | image_url: width: 700 | image_tag: loading: 'lazy', alt: 'Shadowelle lookbook' }}{% endif %}</div><div class="sh-placeholder">{% if section.settings.look_five != blank %}{{ section.settings.look_five | image_url: width: 700 | image_tag: loading: 'lazy', alt: 'Shadowelle lookbook' }}{% endif %}</div></div></div></section>
-
-  <section class="sh-section"><div class="sh-wrap"><div class="sh-promos"><div class="sh-promo sh-placeholder">{% if section.settings.promo_one != blank %}{{ section.settings.promo_one | image_url: width: 1000 | image_tag: loading: 'lazy', alt: 'Shadowelle promotion' }}{% endif %}<div class="sh-promo__copy"><strong>20% off</strong><span>Selected styles</span></div></div><div class="sh-promo sh-placeholder">{% if section.settings.promo_two != blank %}{{ section.settings.promo_two | image_url: width: 1000 | image_tag: loading: 'lazy', alt: 'Shadowelle promotion' }}{% endif %}<div class="sh-promo__copy"><strong>Flat 25% off</strong><span>Everyday icons</span></div></div></div></div></section>
-
-  <section class="sh-section sh-lookbook"><div class="sh-lookbook__media sh-placeholder">{% if section.settings.feature_image != blank %}{{ section.settings.feature_image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: 'Shadowelle featured look' }}{% endif %}</div><div class="sh-lookbook__copy"><p class="sh-kicker">Featured looks</p><h2 class="sh-title">Explore timeless pieces that move with your lifestyle.</h2><p>{{ section.settings.feature_text }}</p><div class="sh-detail"><div>Look 01<span>Soft tailoring</span></div><div>Look 02<span>Quiet statement</span></div><div>Look 03<span>Easy elegance</span></div><div>Look 04<span>Modern essentials</span></div></div><a class="sh-btn" href="{{ section.settings.hero_link }}">Shop the edit</a></div></section>
-
-  <section class="sh-section"><div class="sh-wrap sh-timeline"><div><p class="sh-kicker">Our journey</p><h2 class="sh-title">A wardrobe with a point of view.</h2></div><div><div class="sh-placeholder" style="aspect-ratio:16/9">{% if section.settings.journey_image != blank %}{{ section.settings.journey_image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: 'Shadowelle journey' }}{% endif %}</div><div class="sh-timeline__list"><div class="sh-timeline__item"><b>2020 · The beginning</b><p>A small edit, carefully considered.</p></div><div class="sh-timeline__item"><b>2023 · The vision</b><p>Growing the language of everyday elegance.</p></div><div class="sh-timeline__item"><b>2026 · Shadowelle</b><p>Made for the life you are living now.</p></div></div></div></div></section>
-
-  <section class="sh-section"><div class="sh-wrap"><div class="sh-before"><div class="sh-placeholder">{% if section.settings.before_image != blank %}{{ section.settings.before_image | image_url: width: 1000 | image_tag: loading: 'lazy', alt: 'Shadowelle before look' }}{% endif %}<span class="sh-before__label">Before</span></div><div class="sh-placeholder">{% if section.settings.after_image != blank %}{{ section.settings.after_image | image_url: width: 1000 | image_tag: loading: 'lazy', alt: 'Shadowelle after look' }}{% endif %}<span class="sh-before__label">After</span></div></div></div></section>
-
-  <section class="sh-section"><div class="sh-wrap"><div class="sh-center"><p class="sh-kicker">See the style in motion</p><h2 class="sh-title">Looks for wherever the day takes you.</h2></div><div class="sh-look-grid"><div class="sh-placeholder">{% if section.settings.motion_one != blank %}{{ section.settings.motion_one | image_url: width: 800 | image_tag: loading: 'lazy', alt: 'Shadowelle style' }}{% endif %}<span>Look 01</span></div><div class="sh-placeholder">{% if section.settings.motion_two != blank %}{{ section.settings.motion_two | image_url: width: 800 | image_tag: loading: 'lazy', alt: 'Shadowelle style' }}{% endif %}<span>Look 02</span></div><div class="sh-placeholder">{% if section.settings.motion_three != blank %}{{ section.settings.motion_three | image_url: width: 800 | image_tag: loading: 'lazy', alt: 'Shadowelle style' }}{% endif %}<span>Look 03</span></div><div class="sh-placeholder">{% if section.settings.motion_four != blank %}{{ section.settings.motion_four | image_url: width: 800 | image_tag: loading: 'lazy', alt: 'Shadowelle style' }}{% endif %}<span>Look 04</span></div></div></div></section>
-
-  <section class="sh-section sh-testimonials"><div class="sh-wrap"><div class="sh-center"><p class="sh-kicker">Shopper feedback</p><h2 class="sh-title">Loved by women with places to be.</h2></div><div class="sh-testimonials-grid"><div class="sh-quote"><div class="sh-stars">★★★★★</div><p>“Beautifully made, easy to style, and even better in person.”</p><b>Ava · Verified shopper</b></div><div class="sh-quote"><div class="sh-stars">★★★★★</div><p>“The kind of pieces that make getting dressed feel effortless.”</p><b>Maya · Verified shopper</b></div><div class="sh-quote"><div class="sh-stars">★★★★★</div><p>“Modern, comfortable, and polished without trying too hard.”</p><b>Leah · Verified shopper</b></div></div></div></section>
-
-  <section class="sh-statement"><p class="sh-kicker">The Shadowelle woman</p><p>Effortless modern style for confident everyday fashion and timeless elegance.</p><a class="sh-btn" href="{{ section.settings.hero_link }}">Follow our style</a></section>
-
-  <section class="sh-section sh-faq"><div class="sh-wrap"><div class="sh-center"><p class="sh-kicker">Need to know</p><h2 class="sh-title">FAQ</h2></div><div class="sh-faq__grid"><details open><summary>How do Shadowelle pieces fit? <span>＋</span></summary><p>Each product page includes fit notes and measurements. Use those details to choose your usual size.</p></details><details><summary>How long does delivery take? <span>＋</span></summary><p>Delivery timing is shown at checkout and varies by destination.</p></details><details><summary>Can I return an item? <span>＋</span></summary><p>Review the returns policy linked in the footer before ordering.</p></details><details><summary>How should I care for my pieces? <span>＋</span></summary><p>Care instructions are included on each product page and garment label.</p></details></div></div></section>
-
-  <section class="sh-section"><div class="sh-wrap sh-location"><div class="sh-location__copy"><p class="sh-kicker">Visit us</p><h2 class="sh-title">Timeless wardrobe essentials, wherever you are.</h2><p>Discover the Shadowelle edit online, then make it yours with considered styling and personal details.</p><div class="sh-stats"><div><strong>04</strong><span>Core edits</span></div><div><strong>24/7</strong><span>Online access</span></div><div><strong>01</strong><span>Point of view</span></div></div></div><div class="sh-location__media sh-placeholder">{% if section.settings.location_image != blank %}{{ section.settings.location_image | image_url: width: 1100 | image_tag: loading: 'lazy', alt: 'Shadowelle location' }}{% endif %}</div></div></section>
-
-  <section class="sh-section sh-newsletter"><div class="sh-wrap"><p class="sh-kicker">Stay in the know</p><h2 class="sh-title">Subscribe to our newsletter</h2><p>New drops, styling notes, and considered offers—straight to your inbox.</p>{% form 'customer' %}<input type="hidden" name="contact[tags]" value="newsletter"><input type="email" name="contact[email]" placeholder="Your email address" required><button class="sh-btn" type="submit">Subscribe</button>{% endform %}<p class="sh-source-note">Shadowelle · elevated everyday style</p></div></section>
+  <section class="sh-section">
+    <div class="sh-wrap">
+      <div class="sh-center">
+        <p class="sh-kicker">New collection</p>
+        <h2 class="sh-title">{{ section.settings.latest_heading }}</h2>
+      </div>
+      <div class="sh-products">
+        {% assign latest = section.settings.latest_collection %}
+        {% if latest != blank and latest.products_count > 0 %}
+          {% for product in latest.products limit: 4 %}
+            {% assign product_alt = product.featured_image.alt | default: product.title %}
+            <a class="sh-product" href="{{ product.url }}">
+              <div class="sh-product__media sh-placeholder">
+                {% if product.featured_image %}
+                  {{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '300,500,700', sizes: '(min-width: 750px) 25vw, 50vw', alt: product_alt }}
+                {% endif %}
+              </div>
+              <div class="sh-product__meta">
+                <h3>{{ product.title }}</h3>
+                <p>{{ product.price | money }}</p>
+              </div>
+            </a>
+          {% endfor %}
+        {% else %}
+          {% for i in (1..4) %}
+            <div class="sh-product">
+              <div class="sh-product__media sh-placeholder"></div>
+              <div class="sh-product__meta">
+                <h3>{{ section.settings.placeholder_product_name }} {{ i }}</h3>
+                <p>{{ shop.currency }} · Add your product</p>
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </section>
 </div>
+
 {% schema %}
-{"name":"Shadowelle home","settings":[{"type":"text","id":"hero_kicker","label":"Hero kicker","default":"Elevated everyday style"},{"type":"text","id":"hero_heading","label":"Hero heading","default":"Dress for the life you are living."},{"type":"richtext","id":"hero_text","label":"Hero text","default":"<p>Considered pieces for confident days, quiet nights, and everything in between.</p>"},{"type":"text","id":"hero_button","label":"Hero button","default":"Shop now"},{"type":"url","id":"hero_link","label":"Hero link","default":"/collections/all"},{"type":"text","id":"hero_alt","label":"Hero alt text","default":"Shadowelle fashion collection"},{"type":"image_picker","id":"hero_image","label":"Hero image"},{"type":"text","id":"latest_heading","label":"Latest styles heading","default":"Latest styles"},{"type":"collection","id":"latest_collection","label":"Latest styles collection"},{"type":"text","id":"placeholder_product_name","label":"Placeholder product name","default":"Shadowelle essential"},{"type":"text","id":"edit_heading","label":"Edits heading","default":"Find your look"},{"type":"image_picker","id":"edit_one","label":"Edit one image"},{"type":"image_picker","id":"edit_two","label":"Edit two image"},{"type":"image_picker","id":"edit_three","label":"Edit three image"},{"type":"image_picker","id":"look_one","label":"Lookbook image one"},{"type":"image_picker","id":"look_two","label":"Lookbook image two"},{"type":"image_picker","id":"look_three","label":"Lookbook image three"},{"type":"image_picker","id":"look_four","label":"Lookbook image four"},{"type":"image_picker","id":"look_five","label":"Lookbook image five"},{"type":"image_picker","id":"promo_one","label":"Promotion one image"},{"type":"image_picker","id":"promo_two","label":"Promotion two image"},{"type":"image_picker","id":"feature_image","label":"Featured look image"},{"type":"textarea","id":"feature_text","label":"Featured look text","default":"A considered edit of soft tailoring, fluid silhouettes, and easy layers designed to work beautifully together."},{"type":"image_picker","id":"journey_image","label":"Journey image"},{"type":"image_picker","id":"before_image","label":"Before image"},{"type":"image_picker","id":"after_image","label":"After image"},{"type":"image_picker","id":"motion_one","label":"Motion look one"},{"type":"image_picker","id":"motion_two","label":"Motion look two"},{"type":"image_picker","id":"motion_three","label":"Motion look three"},{"type":"image_picker","id":"motion_four","label":"Motion look four"},{"type":"image_picker","id":"location_image","label":"Location image"}],"blocks":[{"type":"benefit","name":"Benefit","settings":[{"type":"text","id":"text","label":"Text","default":"Free shipping over $200"}]}],"max_blocks":4,"presets":[{"name":"Shadowelle home","blocks":[{"type":"benefit","settings":{"text":"Free shipping over $200"}},{"type":"benefit","settings":{"text":"Easy returns"}},{"type":"benefit","settings":{"text":"Secure checkout"}},{"type":"benefit","settings":{"text":"New styles weekly"}}]}]}
+{
+  "name": "Shadowelle opening",
+  "settings": [
+    { "type": "text", "id": "hero_kicker", "label": "Hero kicker", "default": "Elevated everyday style" },
+    { "type": "text", "id": "hero_heading", "label": "Hero heading", "default": "Dress for the life you are living." },
+    { "type": "richtext", "id": "hero_text", "label": "Hero text", "default": "<p>Considered pieces for confident days, quiet nights, and everything in between.</p>" },
+    { "type": "text", "id": "hero_button", "label": "Hero button", "default": "Shop now" },
+    { "type": "url", "id": "hero_link", "label": "Hero link", "default": "/collections/all" },
+    { "type": "text", "id": "hero_alt", "label": "Hero alt text", "default": "Fashion collection editorial image" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+    { "type": "text", "id": "latest_heading", "label": "Latest styles heading", "default": "Latest styles" },
+    { "type": "collection", "id": "latest_collection", "label": "Latest styles collection" },
+    { "type": "text", "id": "placeholder_product_name", "label": "Placeholder product name", "default": "Shadowelle essential" }
+  ],
+  "blocks": [
+    { "type": "benefit", "name": "Benefit", "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "Free shipping over $200" }] }
+  ],
+  "max_blocks": 4,
+  "presets": [{ "name": "Shadowelle opening", "blocks": [{ "type": "benefit" }, { "type": "benefit" }, { "type": "benefit" }, { "type": "benefit" }] }]
+}
 {% endschema %}

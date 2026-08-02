@@ -1,0 +1,76 @@
+{{ 'find-your-look.css' | asset_url | stylesheet_tag }}
+
+<section id="find-your-look-{{ section.id }}" class="find-your-look color-{{ section.settings.color_scheme }}" {{ section.shopify_attributes }}>
+  <div class="find-your-look__grid">
+    <div class="find-your-look__intro">
+      <p class="find-your-look__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      <div class="find-your-look__intro-copy">{{ section.settings.description }}</div>
+      {% if section.settings.button_label != blank %}
+        <a class="find-your-look__button" href="{{ section.settings.button_link | default: routes.collections_url }}">{{ section.settings.button_label | escape }}</a>
+      {% endif %}
+    </div>
+
+    {% for block in section.blocks %}
+      {% assign fallback_asset = 'find-look-' | append: block.settings.fallback_key | append: '.png' %}
+      {% assign category = block.settings.collection %}
+      {% assign tile_url = block.settings.link %}
+      {% if category != blank %}{% assign tile_url = category.url %}{% endif %}
+      <a class="find-your-look__tile find-your-look__tile--{{ forloop.index }}" href="{{ tile_url | default: routes.collections_url }}" {{ block.shopify_attributes }}>
+        <span class="find-your-look__image">
+          {% if block.settings.image != blank %}
+            {{ block.settings.image | image_url: width: 900 | image_tag: widths: '450, 700, 900', sizes: '(min-width: 769px) 25vw, 90vw', loading: 'lazy', alt: block.settings.image_alt, class: 'find-your-look__img' }}
+          {% else %}
+            <img class="find-your-look__img" src="{{ fallback_asset | asset_url }}" alt="{{ block.settings.image_alt | escape }}" loading="lazy" width="800" height="800">
+          {% endif %}
+        </span>
+        <span class="find-your-look__overlay">
+          <span class="find-your-look__title">{{ block.settings.title | escape }}</span>
+          <span class="find-your-look__count">{% if category != blank %}{{ category.products_count }}{% else %}{{ block.settings.count | escape }}{% endif %}</span>
+        </span>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Find your look",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Find your look" },
+    { "type": "richtext", "id": "description", "label": "Description", "default": "<p>Discover styles that match your mood and elevate your everyday wardrobe.</p>" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "View all styles" },
+    { "type": "url", "id": "button_link", "label": "Button link", "default": "/collections" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category tile",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Tops" },
+        { "type": "text", "id": "count", "label": "Count", "default": "2" },
+        { "type": "text", "id": "fallback_key", "label": "Initial image", "default": "tops" },
+        { "type": "image_picker", "id": "image", "label": "Image override" },
+        { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Model wearing a refined fashion look" },
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "url", "id": "link", "label": "Link override" }
+      ]
+    }
+  ],
+  "max_blocks": 7,
+  "presets": [
+    {
+      "name": "Find your look",
+      "blocks": [
+        { "type": "category", "settings": { "title": "Tops", "count": "2", "fallback_key": "tops" } },
+        { "type": "category", "settings": { "title": "Minis Dress", "count": "3", "fallback_key": "minis-dress" } },
+        { "type": "category", "settings": { "title": "Jacket", "count": "3", "fallback_key": "jacket" } },
+        { "type": "category", "settings": { "title": "Blazers", "count": "5", "fallback_key": "blazers" } },
+        { "type": "category", "settings": { "title": "Skirts", "count": "4", "fallback_key": "skirts" } },
+        { "type": "category", "settings": { "title": "T-Shirts", "count": "3", "fallback_key": "tshirts" } },
+        { "type": "category", "settings": { "title": "Jeans", "count": "3", "fallback_key": "jeans" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

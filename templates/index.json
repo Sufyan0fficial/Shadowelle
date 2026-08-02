@@ -20,7 +20,21 @@
       },
       "block_order": ["card1", "card2", "card3"],
       "settings": {}
+    },
+    "find_your_look": {
+      "type": "find_your_look",
+      "blocks": {
+        "tops": { "type": "category", "settings": { "title": "Tops", "count": "2", "fallback_key": "tops" } },
+        "minis": { "type": "category", "settings": { "title": "Minis Dress", "count": "3", "fallback_key": "minis-dress" } },
+        "jacket": { "type": "category", "settings": { "title": "Jacket", "count": "3", "fallback_key": "jacket" } },
+        "blazers": { "type": "category", "settings": { "title": "Blazers", "count": "5", "fallback_key": "blazers" } },
+        "skirts": { "type": "category", "settings": { "title": "Skirts", "count": "4", "fallback_key": "skirts" } },
+        "tshirts": { "type": "category", "settings": { "title": "T-Shirts", "count": "3", "fallback_key": "tshirts" } },
+        "jeans": { "type": "category", "settings": { "title": "Jeans", "count": "3", "fallback_key": "jeans" } }
+      },
+      "block_order": ["tops", "minis", "jacket", "blazers", "skirts", "tshirts", "jeans"],
+      "settings": {}
     }
   },
-  "order": ["shadowelle_home", "collection_hover_cards"]
+  "order": ["shadowelle_home", "collection_hover_cards", "find_your_look"]
 }
