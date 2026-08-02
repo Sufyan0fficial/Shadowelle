@@ -143,6 +143,16 @@
         "unit": "%",
         "label": "t:settings_schema.typography.settings.body_scale.label",
         "default": 100
+      },
+      {
+        "type": "header",
+        "content": "Card typography"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_card_font",
+        "default": "assistant_n4",
+        "label": "Product card font"
       }
     ]
   },
