@@ -40,14 +40,15 @@
         "card1": {
           "type": "feature_card",
           "settings": {
+            "image": "shopify://shop_images/d869a55db500eebb1bd6223aa2d8d9bd.jpg",
             "image_alt": "Fashion collection editorial image",
             "heading": "Top Seller",
             "subheading": "Special Offer",
             "heading_link": "",
-            "product_1": "",
-            "product_2": "",
-            "product_3": "",
-            "product_4": ""
+            "product_1": "black-pu-leather-shoulder-bag-large-capacity-water-repellent-mkz-655845625034",
+            "product_2": "black-pu-leather-tote-bag-for-women-large-capacity-mkz-847713986060",
+            "product_3": "2026-trendy-pleated-cloud-shoulder-bag-for-women-mkz-774990854478",
+            "product_4": "womens-brown-leather-shoulder-bag-2026-mkz-776511160013"
           }
         },
         "card2": {
