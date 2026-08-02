@@ -42,7 +42,7 @@
         "mobile_logo_position": "center",
         "brand_name": "Shadowelle",
         "menu": "header-menu",
-        "menu_type_desktop": "drawer",
+        "menu_type_desktop": "dropdown",
         "sticky_header_type": "always",
         "show_line_separator": true,
         "transparent_homepage": false,
