@@ -2,14 +2,13 @@
   "sections": {
     "shadowelle_home": {
       "type": "shadowelle-home",
-      "blocks": {
-        "benefit1": { "type": "benefit", "settings": { "text": "Free shipping over $200" } },
-        "benefit2": { "type": "benefit", "settings": { "text": "Easy returns" } },
-        "benefit3": { "type": "benefit", "settings": { "text": "Secure checkout" } },
-        "benefit4": { "type": "benefit", "settings": { "text": "New styles weekly" } }
-      },
-      "block_order": ["benefit1", "benefit2", "benefit3", "benefit4"],
       "settings": {}
+    },
+    "featured_products": {
+      "type": "featured-products-carousel",
+      "blocks": {},
+      "block_order": [],
+      "settings": { "collection": "all" }
     },
     "collection_hover_cards": {
       "type": "collection-hover-cards",
@@ -36,5 +35,5 @@
       "settings": {}
     }
   },
-  "order": ["shadowelle_home", "collection_hover_cards", "find_your_look"]
+  "order": ["shadowelle_home", "featured_products", "collection_hover_cards", "find_your_look"]
 }

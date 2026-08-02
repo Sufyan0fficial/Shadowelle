@@ -1,7 +1,7 @@
 {{ 'shadowelle-home.css' | asset_url | stylesheet_tag }}
 
-<div class="shadowelle-home">
-  <section class="sh-hero">
+<section class="shadowelle-opening" {{ section.shopify_attributes }}>
+  <div class="sh-hero">
     <div class="sh-hero__media sh-placeholder">
       {% if section.settings.hero_image != blank %}
         {{ section.settings.hero_image | image_url: width: 1800 | image_tag: loading: 'eager', widths: '600,900,1200,1800', sizes: '70vw', alt: section.settings.hero_alt }}
@@ -15,52 +15,8 @@
         <a class="sh-btn" href="{{ section.settings.hero_link }}">{{ section.settings.hero_button }}</a>
       </div>
     </div>
-  </section>
-
-  <div class="sh-strip">
-    {% for block in section.blocks %}
-      <div {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
-    {% endfor %}
   </div>
-
-  <section class="sh-section">
-    <div class="sh-wrap">
-      <div class="sh-center">
-        <p class="sh-kicker">New collection</p>
-        <h2 class="sh-title">{{ section.settings.latest_heading }}</h2>
-      </div>
-      <div class="sh-products">
-        {% assign latest = section.settings.latest_collection %}
-        {% if latest != blank and latest.products_count > 0 %}
-          {% for product in latest.products limit: 4 %}
-            {% assign product_alt = product.featured_image.alt | default: product.title %}
-            <a class="sh-product" href="{{ product.url }}">
-              <div class="sh-product__media sh-placeholder">
-                {% if product.featured_image %}
-                  {{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '300,500,700', sizes: '(min-width: 750px) 25vw, 50vw', alt: product_alt }}
-                {% endif %}
-              </div>
-              <div class="sh-product__meta">
-                <h3>{{ product.title }}</h3>
-                <p>{{ product.price | money }}</p>
-              </div>
-            </a>
-          {% endfor %}
-        {% else %}
-          {% for i in (1..4) %}
-            <div class="sh-product">
-              <div class="sh-product__media sh-placeholder"></div>
-              <div class="sh-product__meta">
-                <h3>{{ section.settings.placeholder_product_name }} {{ i }}</h3>
-                <p>{{ shop.currency }} · Add your product</p>
-              </div>
-            </div>
-          {% endfor %}
-        {% endif %}
-      </div>
-    </div>
-  </section>
-</div>
+</section>
 
 {% schema %}
 {
@@ -72,15 +28,8 @@
     { "type": "text", "id": "hero_button", "label": "Hero button", "default": "Shop now" },
     { "type": "url", "id": "hero_link", "label": "Hero link", "default": "/collections/all" },
     { "type": "text", "id": "hero_alt", "label": "Hero alt text", "default": "Fashion collection editorial image" },
-    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
-    { "type": "text", "id": "latest_heading", "label": "Latest styles heading", "default": "Latest styles" },
-    { "type": "collection", "id": "latest_collection", "label": "Latest styles collection" },
-    { "type": "text", "id": "placeholder_product_name", "label": "Placeholder product name", "default": "Shadowelle essential" }
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" }
   ],
-  "blocks": [
-    { "type": "benefit", "name": "Benefit", "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "Free shipping over $200" }] }
-  ],
-  "max_blocks": 4,
-  "presets": [{ "name": "Shadowelle opening", "blocks": [{ "type": "benefit" }, { "type": "benefit" }, { "type": "benefit" }, { "type": "benefit" }] }]
+  "presets": [{ "name": "Shadowelle opening" }]
 }
 {% endschema %}
