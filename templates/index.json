@@ -1,39 +1,194 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "shadowelle_home": {
       "type": "shadowelle-home",
-      "settings": {}
+      "settings": {
+        "hero_kicker": "Elevated everyday style",
+        "hero_heading": "Dress for the life you are living.",
+        "hero_text": "<p>Considered pieces for confident days, quiet nights, and everything in between.</p>",
+        "hero_button": "Shop now",
+        "hero_link": "shopify://collections/all",
+        "hero_alt": "Fashion collection editorial image"
+      }
     },
     "featured_products": {
       "type": "featured-products-carousel",
-      "blocks": {},
-      "block_order": [],
-      "settings": { "collection": "all" }
+      "settings": {
+        "eyebrow": "Our collection",
+        "heading": "Featured products",
+        "description": "Explore our most popular pieces, selected for everyday style.",
+        "collection": "featured-collection",
+        "view_all_label": "View all",
+        "products_to_show": 8,
+        "columns": "5",
+        "default_rating": "4.8",
+        "default_review_count": "120"
+      }
     },
     "collection_hover_cards": {
       "type": "collection-hover-cards",
       "blocks": {
-        "card1": { "type": "feature_card", "settings": { "heading": "Top Seller", "subheading": "Special Offer" } },
-        "card2": { "type": "feature_card", "settings": { "heading": "Trending Now", "subheading": "Shop Before It’s Gone" } },
-        "card3": { "type": "feature_card", "settings": { "heading": "Hot Right Now", "subheading": "Enjoy 30% Off" } }
+        "card1": {
+          "type": "feature_card",
+          "settings": {
+            "image_alt": "Fashion collection editorial image",
+            "heading": "Top Seller",
+            "subheading": "Special Offer",
+            "heading_link": "",
+            "product_1": "",
+            "product_2": "",
+            "product_3": "",
+            "product_4": ""
+          }
+        },
+        "card2": {
+          "type": "feature_card",
+          "settings": {
+            "image_alt": "Fashion collection editorial image",
+            "heading": "Trending Now",
+            "subheading": "Shop Before It’s Gone",
+            "heading_link": "",
+            "product_1": "",
+            "product_2": "",
+            "product_3": "",
+            "product_4": ""
+          }
+        },
+        "card3": {
+          "type": "feature_card",
+          "settings": {
+            "image_alt": "Fashion collection editorial image",
+            "heading": "Hot Right Now",
+            "subheading": "Enjoy 30% Off",
+            "heading_link": "",
+            "product_1": "",
+            "product_2": "",
+            "product_3": "",
+            "product_4": ""
+          }
+        }
       },
-      "block_order": ["card1", "card2", "card3"],
-      "settings": {}
+      "block_order": [
+        "card1",
+        "card2",
+        "card3"
+      ],
+      "settings": {
+        "color_scheme": ""
+      }
     },
     "find_your_look": {
       "type": "find_your_look",
       "blocks": {
-        "tops": { "type": "category", "settings": { "title": "Tops", "count": "2", "fallback_key": "tops" } },
-        "minis": { "type": "category", "settings": { "title": "Minis Dress", "count": "3", "fallback_key": "minis-dress" } },
-        "jacket": { "type": "category", "settings": { "title": "Jacket", "count": "3", "fallback_key": "jacket" } },
-        "blazers": { "type": "category", "settings": { "title": "Blazers", "count": "5", "fallback_key": "blazers" } },
-        "skirts": { "type": "category", "settings": { "title": "Skirts", "count": "4", "fallback_key": "skirts" } },
-        "tshirts": { "type": "category", "settings": { "title": "T-Shirts", "count": "3", "fallback_key": "tshirts" } },
-        "jeans": { "type": "category", "settings": { "title": "Jeans", "count": "3", "fallback_key": "jeans" } }
+        "tops": {
+          "type": "category",
+          "settings": {
+            "title": "Tops",
+            "count": "2",
+            "fallback_key": "tops",
+            "image_alt": "Model wearing a refined fashion look",
+            "collection": "",
+            "link": ""
+          }
+        },
+        "minis": {
+          "type": "category",
+          "settings": {
+            "title": "Minis Dress",
+            "count": "3",
+            "fallback_key": "minis-dress",
+            "image_alt": "Model wearing a refined fashion look",
+            "collection": "",
+            "link": ""
+          }
+        },
+        "jacket": {
+          "type": "category",
+          "settings": {
+            "title": "Jacket",
+            "count": "3",
+            "fallback_key": "jacket",
+            "image_alt": "Model wearing a refined fashion look",
+            "collection": "",
+            "link": ""
+          }
+        },
+        "blazers": {
+          "type": "category",
+          "settings": {
+            "title": "Blazers",
+            "count": "5",
+            "fallback_key": "blazers",
+            "image_alt": "Model wearing a refined fashion look",
+            "collection": "",
+            "link": ""
+          }
+        },
+        "skirts": {
+          "type": "category",
+          "settings": {
+            "title": "Skirts",
+            "count": "4",
+            "fallback_key": "skirts",
+            "image_alt": "Model wearing a refined fashion look",
+            "collection": "",
+            "link": ""
+          }
+        },
+        "tshirts": {
+          "type": "category",
+          "settings": {
+            "title": "T-Shirts",
+            "count": "3",
+            "fallback_key": "tshirts",
+            "image_alt": "Model wearing a refined fashion look",
+            "collection": "",
+            "link": ""
+          }
+        },
+        "jeans": {
+          "type": "category",
+          "settings": {
+            "title": "Jeans",
+            "count": "3",
+            "fallback_key": "jeans",
+            "image_alt": "Model wearing a refined fashion look",
+            "collection": "",
+            "link": ""
+          }
+        }
       },
-      "block_order": ["tops", "minis", "jacket", "blazers", "skirts", "tshirts", "jeans"],
-      "settings": {}
+      "block_order": [
+        "tops",
+        "minis",
+        "jacket",
+        "blazers",
+        "skirts",
+        "tshirts",
+        "jeans"
+      ],
+      "settings": {
+        "eyebrow": "Find your look",
+        "description": "<p>Discover styles that match your mood and elevate your everyday wardrobe.</p>",
+        "button_label": "View all styles",
+        "button_link": "shopify://collections",
+        "color_scheme": ""
+      }
     }
   },
-  "order": ["shadowelle_home", "featured_products", "collection_hover_cards", "find_your_look"]
+  "order": [
+    "shadowelle_home",
+    "featured_products",
+    "collection_hover_cards",
+    "find_your_look"
+  ]
 }
