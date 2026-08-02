@@ -6,7 +6,7 @@
 {% endcomment %}
 
 <nav class="header__inline-menu">
-  {%- assign visible_menu_items = 7 -%}
+  {%- assign visible_menu_items = section.settings.visible_menu_items | default: 3 -%}
   <ul class="list-menu list-menu--inline" role="list">
     {%- for link in section.settings.menu.links -%}
       {%- if forloop.index <= visible_menu_items -%}
