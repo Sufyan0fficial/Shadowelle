@@ -1,0 +1,132 @@
+<section
+  class="hero-slideshow color-{{ section.settings.color_scheme }} gradient"
+  data-hero-slideshow
+  aria-label="{{ section.settings.accessibility_label | escape }}"
+>
+  <div class="hero-slideshow__viewport">
+    <div class="hero-slideshow__track">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign image_alt = block.settings.image.alt | default: block.settings.heading | escape
+          assign mobile_image = block.settings.mobile_image | default: block.settings.image
+        -%}
+        <article class="hero-slideshow__slide{% if forloop.first %} is-active{% endif %}" data-hero-slide role="group" aria-roledescription="slide" aria-label="{{ forloop.index }} of {{ section.blocks.size }}" {{ block.shopify_attributes }}>
+          <div class="hero-slideshow__media">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 2400 | image_tag: widths: '550, 750, 990, 1200, 1500, 1800, 2200, 2400', sizes: '100vw', alt: image_alt, class: 'hero-slideshow__image', preload: forloop.first }}
+              {%- if mobile_image != blank and mobile_image != block.settings.image -%}
+                {{ mobile_image | image_url: width: 1200 | image_tag: widths: '375, 550, 750, 990, 1200', sizes: '100vw', alt: image_alt, class: 'hero-slideshow__image hero-slideshow__image--mobile', loading: 'lazy' }}
+              {%- endif -%}
+            {%- else -%}
+              <div class="hero-slideshow__placeholder" aria-hidden="true"></div>
+            {%- endif -%}
+            <div class="hero-slideshow__overlay" style="--hero-overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }}"></div>
+          </div>
+          <div class="hero-slideshow__content hero-slideshow__content--{{ block.settings.content_position }} page-width">
+            <div class="hero-slideshow__content-inner">
+              {%- if block.settings.eyebrow != blank -%}<span class="hero-slideshow__subheading">{{ block.settings.eyebrow | escape }}</span>{%- endif -%}
+              {%- if block.settings.heading != blank -%}<h1 class="hero-slideshow__heading">{{ block.settings.heading | escape }}</h1>{%- endif -%}
+              {%- if block.settings.text != blank -%}<div class="hero-slideshow__text rte">{{ block.settings.text }}</div>{%- endif -%}
+              {%- if block.settings.button_label != blank -%}<div class="hero-slideshow__actions"><a class="button hero-slideshow__button" href="{{ block.settings.button_link | default: routes.all_products_collection_url }}">{{ block.settings.button_label | escape }}</a></div>{%- endif -%}
+            </div>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+  {%- if section.blocks.size > 1 -%}
+    <div class="hero-slideshow__controls" aria-label="Hero slideshow controls">
+      <button type="button" class="hero-slideshow__control" data-hero-previous aria-label="Previous slide"><span aria-hidden="true">‹</span></button>
+      <div class="hero-slideshow__dots">
+        {%- for block in section.blocks -%}<button type="button" class="hero-slideshow__dot{% if forloop.first %} is-active{% endif %}" data-hero-dot="{{ forloop.index0 }}" aria-label="Go to slide {{ forloop.index }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}"></button>{%- endfor -%}
+      </div>
+      <button type="button" class="hero-slideshow__control" data-hero-next aria-label="Next slide"><span aria-hidden="true">›</span></button>
+    </div>
+  {%- endif -%}
+</section>
+
+{% stylesheet %}
+  .hero-slideshow { --hero-slideshow-height: min(78rem, 82svh); min-height: var(--hero-slideshow-height); position: relative; overflow: hidden; }
+  .hero-slideshow__viewport, .hero-slideshow__track, .hero-slideshow__slide, .hero-slideshow__media, .hero-slideshow__image, .hero-slideshow__image--mobile, .hero-slideshow__placeholder, .hero-slideshow__overlay { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hero-slideshow__track { display: flex; }
+  .hero-slideshow__slide { opacity: 0; pointer-events: none; transition: opacity 500ms ease; }
+  .hero-slideshow__slide.is-active { opacity: 1; pointer-events: auto; z-index: 1; }
+  .hero-slideshow__image, .hero-slideshow__image--mobile { object-fit: cover; }
+  .hero-slideshow__image--mobile { display: none; }
+  .hero-slideshow__placeholder { background: linear-gradient(110deg, #d9ded9 0%, #e8ddd4 50%, #c8d5d8 100%); }
+  .hero-slideshow__overlay { background: rgba(0, 0, 0, var(--hero-overlay-opacity)); }
+  .hero-slideshow__content { min-height: var(--hero-slideshow-height); position: relative; z-index: 2; display: flex; align-items: flex-start; padding-top: 12rem; padding-bottom: 10rem; }
+  .hero-slideshow__content--top-left { justify-content: flex-start; text-align: left; }
+  .hero-slideshow__content--top-center { justify-content: center; text-align: center; }
+  .hero-slideshow__content--top-right { justify-content: flex-end; text-align: right; }
+  .hero-slideshow__content-inner { max-width: 58rem; }
+  .hero-slideshow__subheading { display: block; font-size: 1.4rem; letter-spacing: 0.08em; line-height: 1.2; margin-bottom: 1.8rem; }
+  .hero-slideshow__heading { color: inherit; font-size: clamp(4rem, 6vw, 7.6rem); letter-spacing: -0.05em; line-height: 0.96; margin: 0; max-width: 10ch; }
+  .hero-slideshow__text { color: inherit; font-size: 1.8rem; line-height: 1.45; margin-top: 2rem; max-width: 45rem; }
+  .hero-slideshow__actions { margin-top: 3rem; }
+  .hero-slideshow__button { min-width: 15rem; text-transform: uppercase; }
+  .hero-slideshow__controls { align-items: center; bottom: 2.4rem; display: flex; gap: 1.4rem; left: 50%; position: absolute; transform: translateX(-50%); z-index: 3; }
+  .hero-slideshow__control, .hero-slideshow__dot { appearance: none; background: transparent; border: 0; color: currentColor; cursor: pointer; padding: 0; }
+  .hero-slideshow__control { align-items: center; display: inline-flex; font-size: 3.2rem; height: 4.4rem; justify-content: center; width: 4.4rem; }
+  .hero-slideshow__dots { display: flex; gap: 0.8rem; }
+  .hero-slideshow__dot { background: currentColor; border-radius: 50%; height: 0.7rem; opacity: 0.45; transition: opacity 200ms ease, transform 200ms ease; width: 0.7rem; }
+  .hero-slideshow__dot.is-active { opacity: 1; transform: scale(1.3); }
+  @media screen and (max-width: 749px) {
+    .hero-slideshow { --hero-slideshow-height: min(72rem, 82svh); }
+    .hero-slideshow__content { padding-top: 7rem; padding-bottom: 8rem; }
+    .hero-slideshow__heading { font-size: clamp(3.4rem, 12vw, 5.2rem); max-width: 9ch; }
+    .hero-slideshow__text { font-size: 1.5rem; }
+    .hero-slideshow__slide:has(.hero-slideshow__image--mobile) .hero-slideshow__image:not(.hero-slideshow__image--mobile) { display: none; }
+    .hero-slideshow__slide:has(.hero-slideshow__image--mobile) .hero-slideshow__image--mobile { display: block; }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  document.querySelectorAll('[data-hero-slideshow]').forEach((root) => {
+    const slides = [...root.querySelectorAll('[data-hero-slide]')];
+    const dots = [...root.querySelectorAll('[data-hero-dot]')];
+    let index = 0;
+    const goTo = (nextIndex) => {
+      if (!slides.length) return;
+      index = (nextIndex + slides.length) % slides.length;
+      slides.forEach((slide, slideIndex) => slide.classList.toggle('is-active', slideIndex === index));
+      dots.forEach((dot, dotIndex) => {
+        dot.classList.toggle('is-active', dotIndex === index);
+        dot.setAttribute('aria-current', dotIndex === index ? 'true' : 'false');
+      });
+    };
+    root.querySelector('[data-hero-previous]')?.addEventListener('click', () => goTo(index - 1));
+    root.querySelector('[data-hero-next]')?.addEventListener('click', () => goTo(index + 1));
+    dots.forEach((dot) => dot.addEventListener('click', () => goTo(Number(dot.dataset.heroDot))));
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Hero slideshow",
+  "class": "section-hero-slideshow",
+  "settings": [
+    { "type": "text", "id": "accessibility_label", "label": "Accessibility label", "default": "Featured collection" },
+    { "type": "range", "id": "overlay_opacity", "label": "Image overlay", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 0 },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Desktop image" },
+        { "type": "image_picker", "id": "mobile_image", "label": "Mobile image" },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "New Arrivals" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Elevated Everyday Style" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Discover statement pieces that bring confidence and modern elegance.</p>" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "SHOP NOW" },
+        { "type": "url", "id": "button_link", "label": "Button link" },
+        { "type": "select", "id": "content_position", "label": "Content position", "options": [{ "value": "top-left", "label": "Top left" }, { "value": "top-center", "label": "Top center" }, { "value": "top-right", "label": "Top right" }], "default": "top-left" }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [{ "name": "Hero slideshow", "blocks": [{ "type": "slide" }, { "type": "slide" }] }]
+}
+{% endschema %}

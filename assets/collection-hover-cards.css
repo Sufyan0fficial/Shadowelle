@@ -1,0 +1,22 @@
+.collection-hover-cards { padding: 40px 0; background: rgb(249, 249, 249); color: rgb(255, 255, 255); font-family: var(--font-body-family, 'DM Sans', sans-serif); }
+.collection-hover-cards__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.collection-hover-cards__card { position: relative; min-width: 0; overflow: hidden; aspect-ratio: 900 / 1238; background: #d5d5d5; }
+.collection-hover-cards__media, .collection-hover-cards__image, .collection-hover-cards__placeholder { width: 100%; height: 100%; }
+.collection-hover-cards__image { display: block; object-fit: cover; }
+.collection-hover-cards__placeholder { background: linear-gradient(135deg, #dadada, #bfbfbf); }
+.collection-hover-cards__overlay { position: absolute; z-index: 2; top: 30px; left: 9%; right: 9%; }
+.collection-hover-cards__heading { display: inline; color: #fff; font-family: var(--font-heading-family, 'Work Sans', sans-serif); font-size: clamp(27px, 3vw, 38px); font-weight: 600; line-height: .95; text-transform: uppercase; text-decoration: none; }
+.collection-hover-cards__overlay p { margin: 16px 0 0; color: #fff; font-family: var(--font-heading-family, 'Work Sans', sans-serif); font-size: 16px; line-height: 1.5; }
+.collection-hover-cards__products { position: absolute; z-index: 3; top: 0; right: 0; bottom: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-content: center; gap: 25px 12px; width: 65%; padding: 20px; background: #fff; color: #111; transform: translateX(100%); transition: transform .35s ease; }
+.collection-hover-cards__card:hover .collection-hover-cards__products, .collection-hover-cards__card:focus-within .collection-hover-cards__products { transform: translateX(0); }
+.collection-hover-cards__product { display: flex; min-width: 0; flex-direction: column; gap: 2px; color: #111; font-size: 12px; line-height: 1.2; text-decoration: none; }
+.collection-hover-cards__product-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.collection-hover-cards__product-price { font-size: 12px; }
+.collection-hover-cards__product-image { display: block; width: 100%; aspect-ratio: 600 / 788; margin-top: 4px; object-fit: cover; }
+@media (max-width: 768px) {
+  .collection-hover-cards { padding: 20px 0; }
+  .collection-hover-cards__grid { display: flex; gap: 0; overflow-x: auto; padding-left: 10px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .collection-hover-cards__grid::-webkit-scrollbar { display: none; }
+  .collection-hover-cards__card { flex: 0 0 95%; scroll-snap-align: start; }
+  .collection-hover-cards__products { width: 72%; }
+}

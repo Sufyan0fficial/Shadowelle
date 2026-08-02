@@ -1,0 +1,72 @@
+{{ 'collection-hover-cards.css' | asset_url | stylesheet_tag }}
+
+<section id="collection-hover-{{ section.id }}" class="collection-hover-cards color-{{ section.settings.color_scheme }}" {{ section.shopify_attributes }}>
+  <div class="collection-hover-cards__grid">
+    {% for block in section.blocks %}
+      <article class="collection-hover-cards__card" {{ block.shopify_attributes }}>
+        <div class="collection-hover-cards__media">
+          {% if block.settings.image != blank %}
+            {{ block.settings.image | image_url: width: 1200 | image_tag: widths: '480, 720, 900, 1200', sizes: '(min-width: 769px) 33.333vw, 95vw', loading: 'lazy', alt: block.settings.image_alt, class: 'collection-hover-cards__image' }}
+          {% else %}
+            <div class="collection-hover-cards__placeholder" aria-hidden="true"></div>
+          {% endif %}
+        </div>
+
+        <div class="collection-hover-cards__overlay">
+          {% if block.settings.heading_link != blank %}
+            <a class="collection-hover-cards__heading" href="{{ block.settings.heading_link }}">{{ block.settings.heading | escape }}</a>
+          {% else %}
+            <span class="collection-hover-cards__heading">{{ block.settings.heading | escape }}</span>
+          {% endif %}
+          <p>{{ block.settings.subheading | escape }}</p>
+        </div>
+
+        <div class="collection-hover-cards__products" aria-label="{{ block.settings.heading | escape }} products">
+          {% for product_setting in (1..4) %}
+            {% assign product_key = 'product_' | append: product_setting %}
+            {% assign product = block.settings[product_key] %}
+            {% if product != blank %}
+              <a class="collection-hover-cards__product" href="{{ product.url }}">
+                <span class="collection-hover-cards__product-title">{{ product.title | escape }}</span>
+                <span class="collection-hover-cards__product-price">{{ product.price | money }}</span>
+                {% if product.featured_image != blank %}
+                  {{ product.featured_image | image_url: width: 600 | image_tag: widths: '300, 450, 600', sizes: '(min-width: 769px) 9vw, 82vw', loading: 'lazy', alt: product.featured_image.alt | default: product.title, class: 'collection-hover-cards__product-image' }}
+                {% endif %}
+              </a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection hover cards",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" }
+  ],
+  "blocks": [
+    {
+      "type": "feature_card",
+      "name": "Feature card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Card image" },
+        { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Fashion collection editorial image" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Top Seller" },
+        { "type": "text", "id": "subheading", "label": "Subheading", "default": "Special Offer" },
+        { "type": "url", "id": "heading_link", "label": "Heading link" },
+        { "type": "product", "id": "product_1", "label": "Hover product 1" },
+        { "type": "product", "id": "product_2", "label": "Hover product 2" },
+        { "type": "product", "id": "product_3", "label": "Hover product 3" },
+        { "type": "product", "id": "product_4", "label": "Hover product 4" }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    { "name": "Collection hover cards", "blocks": [{ "type": "feature_card" }, { "type": "feature_card" }, { "type": "feature_card" }] }
+  ]
+}
+{% endschema %}

@@ -81,9 +81,64 @@
     padding: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px 3rem {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px 3rem;
   }
 
+  .header__menu-item {
+    font-size: 1.3rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .header--middle-center .header__heading-link .h2 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 3.6rem;
+    font-weight: 400;
+    letter-spacing: -0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
   .section-header {
     position: sticky; /* This is for fixing a Safari z-index issue. PR #2147 */
     margin-bottom: {{ section.settings.margin_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  .section-header:has(.header-wrapper--transparent-homepage) {
+    margin-bottom: 0;
+  }
+
+  .header-wrapper--transparent-homepage {
+    position: absolute;
+    inset: 0 0 auto;
+    z-index: 4;
+    background: transparent;
+    color: rgb(255, 255, 255);
+  }
+
+  .header-wrapper--transparent-homepage .header__menu-item,
+  .header-wrapper--transparent-homepage .header__icon,
+  .header-wrapper--transparent-homepage .header__heading-link,
+  .header-wrapper--transparent-homepage .list-menu__item--link {
+    color: inherit;
+  }
+
+  .header-wrapper--transparent-homepage .header__heading-link:hover,
+  .header-wrapper--transparent-homepage .header__menu-item:hover,
+  .header-wrapper--transparent-homepage .header__icon:hover {
+    color: inherit;
+    opacity: 0.72;
+  }
+
+  .header-wrapper--transparent-homepage .header__heading-logo {
+    filter: brightness(0) invert(1);
+  }
+
+  .header-wrapper--transparent-homepage.header-wrapper--border-bottom {
+    border-bottom-color: rgba(255, 255, 255, 0.24);
+  }
+
+  .header-wrapper--transparent-homepage .header__icon .svg-wrapper,
+  .header-wrapper--transparent-homepage .header__icon svg,
+  .header-wrapper--transparent-homepage .header__menu-item .icon-caret {
+    color: currentColor;
   }
 
   @media screen and (min-width: 750px) {
@@ -122,7 +177,7 @@
   {% if header_tag == 'sticky-header' %}
     data-sticky-type="{{ section.settings.sticky_header_type }}"
   {% endif %}
-  class="header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}"
+  class="header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}{% if section.settings.transparent_homepage and request.page_type == 'index' %} header-wrapper--transparent-homepage{% endif %}"
 >
   {%- liquid
     assign social_links = false
@@ -172,7 +227,7 @@
             }}
           </div>
         {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
+          <span class="h2">{{ section.settings.brand_name }}</span>
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
@@ -215,7 +270,7 @@
             }}
           </div>
         {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
+          <span class="h2">{{ section.settings.brand_name }}</span>
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
@@ -514,6 +569,12 @@
       "label": "t:sections.header.settings.mobile_logo_position.label"
     },
     {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Text logo",
+      "default": "RICH"
+    },
+    {
       "type": "link_list",
       "id": "menu",
       "default": "main-menu",
@@ -568,6 +629,13 @@
       "id": "show_line_separator",
       "default": true,
       "label": "t:sections.header.settings.show_line_separator.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "transparent_homepage",
+      "default": false,
+      "label": "Transparent header on homepage",
+      "info": "Place the header over the homepage hero image."
     },
     {
       "type": "header",
