@@ -6,9 +6,11 @@
 {% endcomment %}
 
 <nav class="header__inline-menu">
+  {%- assign visible_menu_items = 7 -%}
   <ul class="list-menu list-menu--inline" role="list">
     {%- for link in section.settings.menu.links -%}
-      <li>
+      {%- if forloop.index <= visible_menu_items -%}
+        <li>
         {%- if link.links != blank -%}
           <header-menu class="header-menu--dropdown">
             <details id="Details-HeaderMenu-{{ forloop.index }}">
@@ -98,12 +100,44 @@
             </span>
           </a>
         {%- endif -%}
-      </li>
+        </li>
+      {%- endif -%}
     {%- endfor -%}
-    <li>
-      <a href="{{ routes.collections_url }}" class="header__menu-item list-menu__item link link--text focus-inset">
-        <span>COLLECTIONS</span>
-      </a>
-    </li>
+
+    {%- if section.settings.menu.links.size > visible_menu_items -%}
+      <li>
+        <header-menu class="header-menu--dropdown">
+          <details id="Details-HeaderMenu-More">
+            <summary
+              id="HeaderMenu-more"
+              class="header__menu-item list-menu__item link focus-inset"
+              aria-haspopup="true"
+            >
+              <span>More</span>
+              {{- 'icon-caret.svg' | inline_asset_content -}}
+            </summary>
+            <ul
+              id="HeaderMenu-MenuList-More"
+              class="header__submenu header-menu__dropdown list-menu list-menu--disclosure color-{{ section.settings.menu_color_scheme }} gradient caption-large motion-reduce global-settings-popup"
+              role="list"
+              tabindex="-1"
+            >
+              {%- for link in section.settings.menu.links offset: visible_menu_items -%}
+                <li>
+                  <a
+                    id="HeaderMenu-more-{{ link.handle }}"
+                    href="{{ link.url }}"
+                    class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if link.current %} list-menu__item--active{% endif %}"
+                    {% if link.current %}aria-current="page"{% endif %}
+                  >
+                    {{- link.title | escape -}}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </details>
+        </header-menu>
+      </li>
+    {%- endif -%}
   </ul>
 </nav>
