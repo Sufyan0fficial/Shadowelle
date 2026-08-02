@@ -43,7 +43,7 @@
         "brand_name": "Shadowelle",
         "menu": "header-menu",
         "menu_type_desktop": "drawer",
-        "sticky_header_type": "on-scroll-up",
+        "sticky_header_type": "always",
         "show_line_separator": true,
         "transparent_homepage": false,
         "color_scheme": "scheme-2",
