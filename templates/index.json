@@ -28,8 +28,8 @@
         "description": "Explore our most popular pieces, selected for everyday style.",
         "collection": "featured-collection",
         "view_all_label": "View all",
-        "products_to_show": 8,
-        "columns": "5",
+        "products_to_show": 5,
+        "columns": "4",
         "default_rating": "4.8",
         "default_review_count": "120"
       }
