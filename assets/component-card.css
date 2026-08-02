@@ -593,3 +593,113 @@
     clip-path: polygon(var(--shape--blob-5));
   }
 }
+.product-card-wrapper .card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(var(--color-foreground), .12);
+  border-radius: 16px;
+  background: rgb(var(--color-background));
+  box-shadow: 0 4px 18px rgba(31, 29, 27, .06);
+}
+
+.product-card-wrapper .card__inner > .card__content {
+  display: none;
+}
+
+.product-card-wrapper .card__media {
+  margin: 0;
+  width: 100%;
+}
+
+.product-card-wrapper .card__inner .card__media,
+.product-card-wrapper .card__inner .card__media .media {
+  border-radius: 0;
+}
+
+.product-card-wrapper .card__content {
+  display: block;
+  padding: 18px 16px 16px;
+  text-align: center;
+}
+
+.product-card-wrapper .card__information,
+.product-card-wrapper .card-information {
+  padding: 0;
+  text-align: center;
+}
+
+.product-card-wrapper .card__heading {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.product-card-wrapper .card-information {
+  margin-top: 10px;
+}
+
+.product-card-wrapper .shadowelle-global-rating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  color: rgba(var(--color-foreground), .68);
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.product-card-wrapper .shadowelle-global-rating span:first-child {
+  color: #e8a51c;
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+.product-card-wrapper .price {
+  justify-content: center;
+  gap: 8px;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.product-card-wrapper .price__regular,
+.product-card-wrapper .price__sale {
+  justify-content: center;
+}
+
+.product-card-wrapper .quick-add {
+  margin: 16px 0 0;
+}
+
+.product-card-wrapper .quick-add__submit {
+  min-height: 42px;
+  border: 1px solid rgb(var(--color-foreground));
+  border-radius: 4px;
+  background: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.product-card-wrapper .quick-add__submit:hover {
+  background: transparent;
+  color: rgb(var(--color-foreground));
+}
+
+.shadowelle-global-sale {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 4;
+  padding: 6px 9px;
+  border-radius: 4px;
+  background: #d92727;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  line-height: 1;
+}
